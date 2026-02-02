@@ -4,7 +4,7 @@
 
 void *customThreadFunction(void *number);
 
-
+void *sayGreetings(void *data);
 
 
 
