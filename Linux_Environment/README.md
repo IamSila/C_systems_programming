@@ -50,4 +50,5 @@ o - r-- -> 4 (4 + 0 + 0)
 - whois
 - traceroute
 - dig
+- ifconfig
 - netstat
