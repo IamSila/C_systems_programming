@@ -58,4 +58,4 @@
 
 # Parallelism
 - `is a mechanism that increases computational speed by using multiple processors.`
-- Tasks are executing simultaneously and at the same time.
+- Tasks are executing `simultaneously and at the same time.`
