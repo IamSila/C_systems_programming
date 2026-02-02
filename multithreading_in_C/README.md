@@ -51,4 +51,11 @@
 - Responsiveness
 - Efficienct memory utilization
 - Efficient CPU utilization
--
+
+# Concurrency
+- Mechanism that `decreases the response time of a system by using a single processing unit.`
+- In concurrency, `a major task is divided into subtasks that execute simultaneously BUT NOT AT THE SAME TIME.`
+
+# Parallelism
+- `is a mechanism that increases computational speed by using multiple processors.`
+- Tasks are executing simultaneously and at the same time.
