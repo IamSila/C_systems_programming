@@ -61,6 +61,18 @@ int pthread_equal(pthread_t thread1, pthread_t thread2);
 
 void pthead_exit(void *retval)
 
+/***
+ * pthread_cancel - used for thread cancelation
+ * @thread: the thread to cancelation
+ * Return: Integer value
+ */
+int pthread_cancel(pthread_t thread);
 
+/**
+ * pthread_detach - detaches a thread in a detached state
+ * @thread: the thread to detach
+ * Return: Integer value as output.
+ */
 
+int pthread_detach(pthread_t thread);
 #endif
