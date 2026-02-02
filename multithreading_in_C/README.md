@@ -39,3 +39,16 @@
         - If we call sleep it goes to the wait state.
     - Terminated
         - State for a completed process.
+
+# Introduction to Multithreading
+## Multithreading architecture
+- Multiple threads in one process to execute a task.
+- All the threads share a common memory space and allocation.
+
+## Benefits of Multithreading
+- Efficient resouce sharing
+- Application scalability
+- Responsiveness
+- Efficienct memory utilization
+- Efficient CPU utilization
+-
