@@ -33,7 +33,7 @@ int main(void)
 	}
 	char content[1024];
 	printf("Enter the content to write to the file: \n");
-	scanf("%[^\n]%*c", content);
+	scanf("%[^\n]%*s", content);
 
 	size = write(file_descriptor, content, strlen(content));
 	printf("Size written is: %d", size);
