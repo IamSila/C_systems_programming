@@ -21,7 +21,6 @@ int main(void)
 {
 	char filePath[255];
 	int new_permission_value;
-	mode_t permission_value;
 	int permission_status;
 
 	printf("enter the file path: \n");
@@ -30,9 +29,8 @@ int main(void)
 	printf("Enter the new permission set in format '0444': \n");
 	scanf("%d", &new_permission_value);
 
-	permission_value = (mode_t)new_permission_value;
 
-	permission_status = chmod(filePath, permission_value);
+	permission_status = chmod(filePath, (mode_t) new_permission_value);
 
 	if (permission_status == 0)
 	{
