@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <fcntl.h>
 #include <stdio.h>
-#include <stdlib.h>
 
 
 int access(char *filePath, int amode);
@@ -36,12 +35,12 @@ int main(void)
 
 	if (file_status == -1)
 	{
-		printf("file does not exist: creating the file: ");
+		printf("file does not exist: creating the file: \n");
 
 		file_descriptor = creat(filepath, O_RDWR);
 		if (file_descriptor == 0)
 		{
-			printf("%s created successfully", filepath);
+			printf("%s created successfully\n", filepath);
 		}
 	}	
 	else
@@ -55,19 +54,19 @@ int main(void)
 
 	if (read_status == 0 && write_status == 0 && execute_status == 0)
 	{
-		printf("%s has rwx permissions", filepath);
+		printf("%s has rwx permissions\n", filepath);
 	}
 	else if(read_status == 0 && write_status == 0 && execute_status == -1)
 	{
-		printf("%s has rw_ permissions", filepath);
+		printf("%s has rw_ permissions\n", filepath);
 	}
 	else if (read_status == 0 && write_status == -1 && execute_status == 0)
 	{
-		printf("%s has r_x permissions", filepath);
+		printf("%s has r_x permissions\n", filepath);
 	}
 	else
 	{
-		printf("No permissions found for %s", filepath);
+		printf("No permissions found for %s\n", filepath);
 	}
 	return (0);
 }
