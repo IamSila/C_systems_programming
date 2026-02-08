@@ -25,3 +25,9 @@ example;
 unlink myfile1
 
 ```
+
+## hardlink
+```
+ln <filename> <hard_link_name>
+
+```
