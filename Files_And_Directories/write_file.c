@@ -19,7 +19,7 @@ int main(void)
 	char filename[255];
 	int file_descriptor;
 	int size;
-
+	char content[1024];
 
 
 	printf("Enter the filename to open: \n");
@@ -31,7 +31,9 @@ int main(void)
 		perror("Error! Cannot open the file specified");
 		exit(1);
 	}
-	char content[1024];
+
+
+
 	printf("Enter the content to write to the file: \n");
 	scanf("%[^\n]%*s", content);
 
