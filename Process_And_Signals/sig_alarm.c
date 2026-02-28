@@ -27,4 +27,5 @@ int main(void)
 void raisedAlarm(int sig)
 {
   printf("SIGALM raised and handled gracefully\n");
+  exit(0);
 }
