@@ -1,16 +1,12 @@
-#include <stdio.h>
-#include <stdlib.h>
-/**#include <signal.h> */
-#include <unistd.h>
-#include <fcntl.h>
-#include <string.h>
+#include "sysmon.h"
+#include "memory_monitoring.c"
 
-#define EXIT_CODE 0
 
 /**
  * creating_child_process - creates a child process and exits from the parent process
  * Return: The id of the child process
  */
+
 
 int creating_child_process(void)
 {
@@ -77,6 +73,7 @@ int creating_child_process(void)
   else
   {
     perror("Failed to open /var/run/sysmon.pid\n");
+    _Exit(EXIT_FAILURE);
   }
   
   snprintf(buff, sizeof(buff), "%d", getpid());
@@ -107,8 +104,7 @@ int creating_child_process(void)
   }
 
   printf("Get pwd %s", getenv("PWD"));
-
-
+  
   return (pid);
 }
 
@@ -127,9 +123,6 @@ int main(void)
 
   /** I create a child process */
   creating_child_process();
-
-  
-  
-
+  memory_monitor();
   return (0);
 }
