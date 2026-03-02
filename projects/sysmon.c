@@ -18,6 +18,7 @@ int creating_child_process(void)
   int pwd_status;
   int fd;
   char buff[10];
+  int write_status;
   char *root_directory = "/";
 
   pid = fork();
@@ -79,9 +80,14 @@ int creating_child_process(void)
   }
   
   snprintf(buff, sizeof(buff), "%d", getpid());
-  write(fd, buff, strlen(buff));
+  write_status = write(fd, buff, strlen(buff));
+  
+  if (write_status == -1)
+  {
+    perror("daemon not written in /var/run/sysmon.pid\n");
+  }
 
-
+  close(fd);
 
   while (1)
   {
