@@ -1,6 +1,4 @@
 #include "sysmon.h"
-#include <stdlib.h>
-
 /**
  * memory_monitor - reads contents of /proc/meminfo
  * Return: Nothing
@@ -20,6 +18,7 @@ void memory_monitor()
   long MemAvailable = 0;
   long SwapTotal = 0;
   long SwapFree = 0;
+  long SwapUsed = SwapTotal - SwapFree;
 
   fd = fopen("/proc/meminfo", "r");
 
@@ -49,13 +48,6 @@ void memory_monitor()
   }
 
 
-  printf("Total Memory: %ld KB\n", MemTotal);
-  printf("Free Memory: %ld KB\n", MemTotal);
-  printf("Available Memory: %ld KB\n", MemAvailable);
-  printf("Total Swap Memory: %ld KB\n", SwapTotal);
-  printf("Free Swap Memory: %ld KB\n", SwapFree);
-  printf("Used Swap Memory: %ld KB\n\n\n\n\n", (SwapTotal - SwapFree));
-  printf("Credits to cii_h4ck3r -----  ;)\n");
 
   file_descriptor = open("/var/log/sysmon.log", O_CREAT | O_RDWR);
   if (file_descriptor == -1)
@@ -69,9 +61,19 @@ void memory_monitor()
    * write(file_descriptor, void* buffer, size_t buffer)
    * */
 
-  snprintf(content, sizeof(content), "Total Memory: %ld", MemTotal);
+  snprintf(content, sizeof(content), "Total Memory: %ld\n", MemTotal);
+  write(file_descriptor, content, sizeof(content));
+  snprintf(content, sizeof(content), "Available Memory: %ld\n", MemAvailable);
+  write(file_descriptor, content, sizeof(content));
+  snprintf(content, sizeof(content), "Total Swap Memory: %ld\n", SwapTotal);
+  write(file_descriptor, content, sizeof(content));
+  snprintf(content, sizeof(content), "Free Swap Memory: %ld", SwapFree);
+  write(file_descriptor, content, sizeof(content));
+  snprintf(content, sizeof(content), "Used Swap Memory: %ld", SwapUsed);
   write(file_descriptor, content, sizeof(content));
 
+
+  close(file_descriptor);
 
 }
 

@@ -1,5 +1,4 @@
 #include "sysmon.h"
-#include "memory_monitoring.c"
 
 
 /**
@@ -124,5 +123,6 @@ int main(void)
   /** I create a child process */
   creating_child_process();
   memory_monitor();
+  cpu_monitor();
   return (0);
 }

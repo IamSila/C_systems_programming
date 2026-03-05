@@ -10,6 +10,10 @@
 
 
 
+void memory_monitor(void);
+void cpu_monitor(void);
+
+
 
 
 
