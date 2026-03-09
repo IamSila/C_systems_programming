@@ -1,4 +1,6 @@
 #include "sysmon.h"
+#define SIZE 1024;
+
 
 /**
 * cpu_monitor - monitor the state of the CPU
@@ -10,47 +12,52 @@ void cpu_monitor(void)
 {
   FILE *fd;
   char line[20];
-  long ctxt;
-  long btime;
-  long processes;
-  long procs_running;
-  long procs_blocked;
-  char content[30];
-  int file_descriptor;
+  int fileDescriptor;
+
+  /** store the cpu details */
+  struct cpu_metrics
+  {
+    long ctxt;
+    long btime;
+    long processes;
+    long procs_running;
+    long procs_blocked;
+  };
+
+  struct cpu_metrics cpu1;
+
+
 
 
   fd = fopen("/proc/stat", "r");
 
   if (fd == NULL)
   {
-    perror("Error: /proc/stat not open\n");
+    printf("Error: /proc/stat not open\n");
     exit(EXIT_SUCCESS);
   }
 
   while (fgets(line, sizeof(line), fd))
   {
-    sscanf(line, "ctxt %ld", &ctxt);
+    sscanf(line, "ctxt %ld", &cpu1.ctxt);
     continue;
-    sscanf(line, "btime %ld", &btime);
+    sscanf(line, "btime %ld", &cpu1.btime);
     continue;
-    sscanf(line, "processes %ld", &processes);
+    sscanf(line, "processes %ld", &cpu1.processes);
     continue;
-    sscanf(line, "procs_running %ld", &procs_running);
+    sscanf(line, "procs_running %ld", &cpu1.procs_running);
     continue;
-    sscanf(line, "procs_blocked %ld", &procs_blocked);
+    sscanf(line, "procs_blocked %ld", &cpu1.procs_blocked);
     continue;
   }
 
-  file_descriptor = open("/var/run/sysmon.log", O_APPEND);
-  snprintf(content, sizeof(content), "ctxt: %ld\n\n\n\n", ctxt);
-  write(file_descriptor, content, sizeof(content));
-  snprintf(content, sizeof(content), "btime: %ld\n", btime);
-  write(file_descriptor, content, sizeof(content));
-  snprintf(content, sizeof(content), "Processes: %ld\n", processes);
-  write(file_descriptor, content, sizeof(content));
-  snprintf(content, sizeof(content), "Procs_running: %ld", procs_running);
-  write(file_descriptor, content, sizeof(content));
-  snprintf(content, sizeof(content), "Procs_blocked: %ld", procs_blocked);
-  write(file_descriptor, content, sizeof(content));
+  printf("%ld", cpu1.ctxt);
+
+  fileDescriptor = open("/var/log/sysmon.log", O_APPEND);
+
+
+  write(fileDescriptor, line, sizeof(line));
+
+  close(fileDescriptor);
 
 }
