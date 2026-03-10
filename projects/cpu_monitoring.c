@@ -12,6 +12,7 @@ void cpu_monitor(void)
 {
   FILE *fd;
   char line[20];
+  char content[30];
   int fileDescriptor;
 
   /** store the cpu details */
@@ -53,11 +54,20 @@ void cpu_monitor(void)
 
   printf("%ld", cpu1.ctxt);
 
-  fileDescriptor = open("/var/log/sysmon.log", O_APPEND);
+  fileDescriptor = open("/var/log/sysmon.log", O_RDWR | O_APPEND);
 
 
-  write(fileDescriptor, line, sizeof(line));
+  snprintf(content, sizeof(content), "Ctxt: %ld\n", cpu1.ctxt);
+  write(fileDescriptor, content, sizeof(content));
+  snprintf(content, sizeof(content), "Btime: %ld\n", cpu1.btime);
+  write(fileDescriptor, content, sizeof(content));
+  snprintf(content, sizeof(content), "Processes: %ld\n", cpu1.processes);
+  write(fileDescriptor, content, sizeof(content));
+  snprintf(content, sizeof(content), "procs running: %ld", cpu1.procs_running);
+  write(fileDescriptor, content, sizeof(content));
+  snprintf(content, sizeof(content), "Procs blocked: %ld", cpu1.procs_blocked);
+  write(fileDescriptor, content, sizeof(content));
 
-  close(fileDescriptor);
+
 
 }

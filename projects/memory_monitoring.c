@@ -49,7 +49,7 @@ void memory_monitor()
 
 
 
-  file_descriptor = open("/var/log/sysmon.log", O_CREAT | O_RDWR);
+  file_descriptor = open("/var/log/sysmon.log", O_CREAT | O_RDWR | O_APPEND);
   if (file_descriptor == -1)
   {
     perror("File not opened\n");

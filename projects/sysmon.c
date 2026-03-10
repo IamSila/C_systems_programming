@@ -103,6 +103,7 @@ int creating_child_process(void)
   }
 
   printf("Get pwd %s", getenv("PWD"));
+
   
   return (pid);
 }
@@ -122,6 +123,19 @@ int main(void)
 
   /** I create a child process */
   creating_child_process();
+  int pwd_status;
+  char *root_directory;
+
+  root_directory = "/";
+
+  pwd_status = chdir(root_directory);
+
+  if (pwd_status < 0)
+  {
+    perror("Directory not changed");
+  }
+
+
   memory_monitor();
   cpu_monitor();
   return (0);
