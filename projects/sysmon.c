@@ -127,10 +127,18 @@ int main(void)
     perror("Directory not changed\n");
     printf("Still at: %s", current_directory);
   }
-  else {
-    current_directory = getcwd(DIR, sizeof(DIR));
-    printf("Directory changed to: %s \n", current_directory);
+
+
+
+  if (strcmp(current_directory, "/") == 0)
+  {
+      printf("Directory changed to: %s \n", current_directory);
   }
+  else 
+  {
+    perror("Directory not changed\n");
+  }
+
 
 
   /** I create a child process */
