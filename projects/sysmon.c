@@ -89,7 +89,6 @@ int creating_child_process(void)
   {
     printf("Daemon running\n");
     sleep(1);
-    break;
   }
 
   
