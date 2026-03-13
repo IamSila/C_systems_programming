@@ -10,11 +10,10 @@
 int creating_child_process(void)
 {
   pid_t pid;
-  int pwd_status;
   int fd;
   char buff[10];
-  int write_status;
-  char *root_directory = "/";
+  int write_status; 
+  mode_t mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
 
   pid = fork();
 
@@ -65,7 +64,7 @@ int creating_child_process(void)
   }
 
   /** sending the pid to /var/run/sysmon.pid */
-  fd = open("/var/run/sysmon.pid", O_CREAT, 0640);
+  fd = open("/var/run/sysmon.pid", O_RDWR | O_CREAT, mode);
   if (fd > 0)
   {
     printf("/var/run/sysmon.pid: open successfully\n");
@@ -76,7 +75,7 @@ int creating_child_process(void)
     _Exit(EXIT_FAILURE);
   }
   
-  snprintf(buff, sizeof(buff), "%d", getpid());
+  snprintf(buff, sizeof(buff), "%d\n", getpid());
   write_status = write(fd, buff, sizeof(buff));
   
   if (write_status == -1)
@@ -93,16 +92,7 @@ int creating_child_process(void)
     break;
   }
 
-  pwd_status = chdir(root_directory);
-
-  if (pwd_status == -1)
-  {
-    perror("Directory not changed\n");
-  }
-  else {
-    printf("pwd: / \n");
-  }
-
+  
   printf("Get pwd %s", getenv("PWD"));
 
   
@@ -121,22 +111,28 @@ int creating_child_process(void)
 
 int main(void)
 {
-
-  /** I create a child process */
-  creating_child_process();
   int pwd_status;
   char *root_directory;
+  char DIR[100];
+  char *current_directory;
 
   root_directory = "/";
-
+ 
   pwd_status = chdir(root_directory);
 
-  if (pwd_status < 0)
+  if (pwd_status == -1)
   {
-    perror("Directory not changed");
+    perror("Directory not changed\n");
+    getcwd(DIR, sizeof(DIR));
+  }
+  else {
+    current_directory = getcwd(DIR, sizeof(DIR));
+    printf("Directory changed to: %s \n", current_directory);
   }
 
 
+  /** I create a child process */
+  creating_child_process();
   memory_monitor();
   cpu_monitor();
   return (0);
