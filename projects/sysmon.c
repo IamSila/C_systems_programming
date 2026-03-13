@@ -117,13 +117,15 @@ int main(void)
   char *current_directory;
 
   root_directory = "/";
- 
+  current_directory = getcwd(DIR, sizeof(DIR));
+
   pwd_status = chdir(root_directory);
+
 
   if (pwd_status == -1)
   {
     perror("Directory not changed\n");
-    getcwd(DIR, sizeof(DIR));
+    printf("Still at: %s", current_directory);
   }
   else {
     current_directory = getcwd(DIR, sizeof(DIR));
