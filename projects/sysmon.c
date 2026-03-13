@@ -14,6 +14,7 @@ int creating_child_process(void)
   char buff[10];
   int write_status; 
   mode_t mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
+ 
 
   pid = fork();
 
@@ -114,7 +115,7 @@ int main(void)
   char *root_directory;
   char DIR[100];
   char *current_directory;
-
+  
   root_directory = "/";
   current_directory = getcwd(DIR, sizeof(DIR));
 

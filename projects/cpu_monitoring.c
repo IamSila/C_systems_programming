@@ -14,6 +14,8 @@ void cpu_monitor(void)
   char line[20];
   char content[30];
   int fileDescriptor;
+  mode_t mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
+
 
   /** store the cpu details */
   struct cpu_metrics
@@ -54,7 +56,7 @@ void cpu_monitor(void)
 
   printf("%ld", cpu1.ctxt);
 
-  fileDescriptor = open("/var/log/sysmon.log", O_RDWR | O_APPEND);
+  fileDescriptor = open("/var/log/sysmon.log", O_CREAT | O_RDWR | O_APPEND, mode);
 
 
   snprintf(content, sizeof(content), "Ctxt: %ld\n", cpu1.ctxt);
