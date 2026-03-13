@@ -64,7 +64,7 @@ int creating_child_process(void)
   }
 
   /** sending the pid to /var/run/sysmon.pid */
-  fd = open("/var/run/sysmon.pid", O_CREAT, 0777);
+  fd = open("/var/run/sysmon.pid", O_CREAT, 0640);
   if (fd > 0)
   {
     printf("File open successfully\n");
