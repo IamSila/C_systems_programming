@@ -124,11 +124,10 @@ int main(void)
 
   if (pwd_status == -1)
   {
-    perror("Directory not changed\n");
-    printf("Still at: %s", current_directory);
+    perror("PwdStatusError: Directory not changed\n");
   }
 
-
+  printf("chdir return code: %d\n", pwd_status);
 
   if (strcmp(current_directory, "/") == 0)
   {
@@ -136,7 +135,7 @@ int main(void)
   }
   else 
   {
-    perror("Directory not changed\n");
+    perror("DirectoryCheckError: Directory not changed\n");
   }
 
 
