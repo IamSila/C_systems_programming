@@ -27,13 +27,13 @@ int creating_child_process(void)
   {
     printf("Child created successfully\n");
   }
-  else if (pid > 1)
+  else
   {
     printf("Exiting from the parent process\n");
     _Exit(EXIT_SUCCESS);
   }
 
-  /** writing the stdin, out and error to /dev/null */
+  /** writing the stdin, out and error to /dev/null 
   fd = open("/dev/null", O_RDWR);
   if (fd == -1)
   {
@@ -51,6 +51,7 @@ int creating_child_process(void)
     close(fd);
   }
 
+*/
 
   /** daemonising the child proces */
   if (setsid() < 0)
@@ -67,7 +68,7 @@ int creating_child_process(void)
   fd = open("/var/run/sysmon.pid", O_CREAT, 0640);
   if (fd > 0)
   {
-    printf("File open successfully\n");
+    printf("/var/run/sysmon.pid: open successfully\n");
   }
   else
   {
