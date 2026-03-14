@@ -10,11 +10,9 @@
 #include <error.h>
 
 
-mode_t mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
 
 void memory_monitor(void);
 void cpu_monitor(void);
-
 
 
 

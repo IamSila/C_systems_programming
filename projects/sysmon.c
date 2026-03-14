@@ -20,7 +20,7 @@ int creating_child_process(void)
 
   if (pid < 0)
   {
-    printf("Child process not created successfully\n");
+    printf("Error: Child process not created\n");
     _Exit(EXIT_FAILURE);
   }
   else if(pid ==  0)
@@ -90,12 +90,12 @@ int creating_child_process(void)
   {
     printf("Daemon running\n");
     sleep(1);
+    break;
   }
 
   
   printf("Get pwd %s", getenv("PWD"));
 
-  
   return (pid);
 }
 
@@ -142,7 +142,6 @@ int main(void)
 
   /** I create a child process */
   creating_child_process();
-  memory_monitor();
   cpu_monitor();
   return (0);
 }
