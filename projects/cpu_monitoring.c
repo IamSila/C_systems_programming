@@ -34,7 +34,7 @@ void cpu_monitor(void)
   {
     int ctxt;
     int btime;
-    int processes;
+     unsigned int processes;
     int procs_running;
     int procs_blocked;
   };
@@ -55,18 +55,10 @@ void cpu_monitor(void)
 
   while (fgets(line, sizeof(line), fd))
   {
-    sscanf(line, "ctxt %d\n", &cpu1.ctxt);
-    continue;
-    sscanf(line, "btime %d\n", &cpu1.btime);
-    continue;
-    sscanf(line, "processes %d\n", &cpu1.processes);
-    continue;
-    sscanf(line, "procs_running %d\n", &cpu1.procs_running);
-    continue;
-    sscanf(line, "procs_blocked %d\n", &cpu1.procs_blocked);
-    continue;
-  }
+    printf("%s", line);
 
+  }
+  
   fclose(fd);
 
 
@@ -80,29 +72,6 @@ void cpu_monitor(void)
   }
 
 
-
-  Ctxt_Metric = snprintf(content, sizeof(content), "Ctxt: %d\n", cpu1.ctxt);
-  write(fileDescriptor, content, Ctxt_Metric);
-
-
-  Btime_Metric = snprintf(content, SIZE, "Btime: %d\n", cpu1.btime);
-  printf("%d", Btime_Metric);
-  write(fileDescriptor, content, Btime_Metric);
-
-
-  /* Process */
-  Processes_Metric = snprintf(content, SIZE, "Processes: %d\n", cpu1.processes);
-  write(fileDescriptor, content, Processes_Metric);
-
-
-  Procs1_Metric = snprintf(content, SIZE, "procs running: %d\n", cpu1.procs_running);
-  printf("%d", Procs1_Metric);
-  write(fileDescriptor, content, Procs1_Metric);
-
-
-
-  ProcsBlockedMetric = snprintf(content, SIZE, "Procs blocked: %d\n", cpu1.procs_blocked);
-  write(fileDescriptor, content, ProcsBlockedMetric);
 
 
 }
