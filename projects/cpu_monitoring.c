@@ -182,7 +182,7 @@ void cpu_monitor(void)
     count++;
   }
 
-
+  free(content_ptr);
 
 }
 
