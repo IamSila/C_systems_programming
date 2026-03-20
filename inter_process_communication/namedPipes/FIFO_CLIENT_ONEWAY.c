@@ -1,6 +1,7 @@
 #include "pipes.h"
 #include <sys/stat.h>
 #define SIZE 1024
+#define FIFO_FILE "FIFO_FILE"
 
 mode_t mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
 
@@ -15,7 +16,7 @@ void sendData(void)
   int write_status;
   int fd;
 
-  fd = open("./FIFO_FILE", O_RDWR | O_CREAT, mode);
+  fd = open(FIFO_FILE, O_RDWR | O_CREAT, mode);
   while(1)
   {
     /** capturing input from the user */
@@ -30,17 +31,15 @@ void sendData(void)
       break;
     }
 
-    if((int)strcmp(message_buffer, "quit\n") == 0 || (int)strlen(message_buffer) == 0)
+    if((int)strcmp(message_buffer, "quit\n") == 0)
     {
       printf("Exit invoked: Typed quit or typed Nothing\n");
+      read(fd, message_buffer, sizeof(message_buffer));
       exit(EXIT_SUCCESS);
-    }
-    else 
-    {
-      printf("FIFO_FILE contains: %s", message_buffer);
     }
 
   }
+  
 }
 
 /**

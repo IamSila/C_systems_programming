@@ -1,52 +1,31 @@
 #include "pipes.h"
 #define SIZE 1024
+#define FIFO_FILE "FIFO_FILE"
 
-mode_t mode = S_IRWXU | S_IROTH | S_IRGRP;
+
+
+int file_descriptor;
+char message_buffer[1024];
+int read_buffer_bytes;
 
 /**
  * receiveData - receives data from the FIFO file
  * Return: Nothing
  */
 
-
-void receiveData(void)
+void receiveData()
 {
-  int fd;
-  int read_status;
-  char message_buffer[SIZE];
+    file_descriptor = open(FIFO_FILE, O_RDONLY);
+    read_buffer_bytes = read(file_descriptor, message_buffer, sizeof(message_buffer));
+    message_buffer[read_buffer_bytes] = '\0';
 
-  
-
-  while(1)
-  {
-    fd = open("./FIFO_FILE", O_CREAT | O_RDWR, mode);
-    if (fd == -1)
-    {
-      perror("Error: Could not open FIFO_FILE.\n");
-      _exit(EXIT_FAILURE);
-    }
-    read_status = read(fd, message_buffer, sizeof(message_buffer));
-    if (read_status == -1)
-    {
-      perror("Error: could not read from the file\n");
-      _exit(EXIT_FAILURE);
-    }
-
+    printf("Received Message: %s\n", message_buffer);
     if((int)strlen(message_buffer) == 0)
     {
-      printf("Read 0 bytes from message buffer: Exiting FIFO_SERVER_ONEWAY.c\n");
-      break;
+      close(file_descriptor);
     }
-    else
-    {
-      printf("Message read from FIFO file: %s", message_buffer);
-      break;
-    }
-  }
-
-
+    
 }
-
 
 
 /**
@@ -63,7 +42,7 @@ int main(void)
 
   /** create a FIFO file using mknod() **/ 
   
-  fd = mknod("./FIFO_FILE", S_IFIFO | 0640, 0);
+  fd = mknod(FIFO_FILE, S_IFIFO | 0640, 0);
   if (fd == 0)
   {
     printf("Successfully created FIFO_FILE\n");
