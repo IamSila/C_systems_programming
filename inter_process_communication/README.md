@@ -20,4 +20,13 @@
 - Operations that use pipes are read and write operations.
 - Pipe creates using a pipe system call.
 
+## Named pipes
+- mkfifo(): creates the FIFO portable file.
+``` int mkfifo(const char *pathname, mode_t mode)
+
+    ; mode  - permissions given to the file ... They are similar to mknod()
+    ; pathname - where to create the fifo portable file
+
+```
+
 
