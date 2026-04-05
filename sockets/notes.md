@@ -96,7 +96,7 @@ request socket.
 
 
 
-int accept(int sockfd, struct socketaddr *addr, socklen_t addrelen);
+int accept(int sockfd, struct socketaddr *addr, socklen_t *addrelen);
 ```
 
 ## send()
