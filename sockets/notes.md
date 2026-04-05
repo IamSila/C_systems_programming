@@ -128,3 +128,41 @@ ssize_t send(int sockfd, const void *buf, size_t len, int flags)
 
 ssize_t recv(int sockfd, void *buf, size_t len, int flags)
 ```
+
+## sendto()
+- Used in udp to send data to connected socket.
+```
+/**
+* @sockfd: Created using socket() sys call.
+* @buf: message to send.
+* @len: size of the message
+* @flags: external flags to handle exceptions during data  transfer.
+* @destaddr: takes address of the destination socket.
+* @addrlen: takes address length of the destination socket.
+* Return: size of message sent, -1 on failure.
+*/
+
+int sendto(int sockfd, const void *buf, size_t len,int flags, const struct sockaddr *dest_addr, socklen_t addrlen)
+
+```
+
+## recvfrom()
+- receives message/data from the socket.
+```
+
+ssize_t recvrom(int sockfd, void *buf, size_t len, struct sockaddr *src_addr, socklen_t *addrlen);
+```
+
+
+## close()
+- Closes connection once usage is completed.
+- frees up the port.
+
+```
+/**
+* sockfd: socket created using socket()
+* Return: 0 for success and -1 if any error occurs.
+*/
+int close(int sockfd)
+```
+
