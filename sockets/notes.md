@@ -22,3 +22,12 @@ should follow certain guidlines:
 
 - <sys/sockets.h> implements sockets programming.
 
+- Transmission modes - half duplex, full duplex or simplex.
+
+- OSI model AND TCP model check.
+
+
+
+
+# SYSTEM CALLS FOR SOCKET PROGRAMMING.
+- 
