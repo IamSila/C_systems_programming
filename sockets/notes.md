@@ -20,3 +20,5 @@ should follow certain guidlines:
     - protocols [tcp or udp]
 
 
+- <sys/sockets.h> implements sockets programming.
+
