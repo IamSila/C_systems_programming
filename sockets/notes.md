@@ -96,7 +96,7 @@ request socket.
 
 
 
-int accept(int sockfd, struct socketaddr *addr, socklen_t *addrelen);
+int accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen);
 ```
 
 ## send()
@@ -169,9 +169,13 @@ int close(int sockfd)
 
 # functions
 - getaddrinfo()
+- freeaddrinfo()
 
 
 # structs
 struct addrinfo
 struct sockaddr
+struct sockaddr_storage --> used in accept to store address details for connected client.
+getnameinfo() --> printing address details of clients.
+
 
