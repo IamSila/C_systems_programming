@@ -166,3 +166,12 @@ ssize_t recvrom(int sockfd, void *buf, size_t len, struct sockaddr *src_addr, so
 int close(int sockfd)
 ```
 
+
+# functions
+- getaddrinfo()
+
+
+# structs
+struct addrinfo
+struct sockaddr
+
